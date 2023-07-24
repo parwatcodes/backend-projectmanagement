@@ -1,0 +1,23 @@
+{
+  "users": [
+    {
+      "fullname": "John Davies",
+      "email": "admin123@gmail.com",
+      "role": "admin",
+      "password": "Admin@123"
+    },
+    {
+      "fullname": "Zephyr Frostwood",
+      "email": "zep.frost@gmail.com",
+      "role": "member",
+      "password": "Zep.frost@123",
+      "hourlyRate": 40
+    }
+  ],
+  "projects": [
+    {
+      "name": "Website Redesign",
+      "description": "Website redesign is the process of revamping and improving the visual appearance, user interface, and overall functionality of a website to enhance user experience and better align with current design trends and business goals. It involves updating the layout, color schemes, typography, and navigation to create a modern, user-friendly, and engaging online platform."
+    }
+  ]
+}

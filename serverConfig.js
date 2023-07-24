@@ -2,12 +2,15 @@ import mongoose from "mongoose";
 
 import Route from './src/route/index.js';
 import { mongoDBUrl } from './src/constants.js';
+import Seed from "./src/seed/seed.js";
 
 export default class ServerConfig {
   constructor(app) {
 
     this.configureMiddleware(app);
     this.initializeDatabase();
+
+    // Seed.insertData();
   }
 
   configureMiddleware(app) {
