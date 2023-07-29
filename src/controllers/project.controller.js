@@ -3,7 +3,7 @@ import ProjectModel from "../models/project.model.js";
 class ProjectController {
   constructor() { }
 
-  static async getProject(req, res, next) {
+  static async getProjects(req, res, next) {
     try {
       let projects = await ProjectModel.find();
 
@@ -78,7 +78,7 @@ class ProjectController {
     }
   }
 
-  static async deleteUser() {
+  static async deleteProject() {
 
   }
 }

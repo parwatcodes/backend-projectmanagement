@@ -10,7 +10,7 @@ class UserController {
       res.json({
         success: true,
         data: users
-      })
+      });
     } catch (error) {
       return res.status(500).json({ error: error.toString() });
     }
@@ -40,27 +40,20 @@ class UserController {
 
   static async getUser(req, res, next) {
     try {
-      const { email, password } = req.body;
-      const user = await UserModel.findOne({ email });
+      const { id } = req.params;
+      const user = await UserModel.findById(id);
 
       if (!user) {
         return res.status(401).json({
           success: false,
-          message: "Email not registered."
-        })
-      }
-
-      if (user && user.password !== password) {
-        return res.status(401).json({
-          success: false,
-          message: "Password did not match."
-        })
+          message: "User not found."
+        });
       }
 
       return res.json({
         success: true,
         data: user
-      })
+      });
     } catch (error) {
       return res.status(500).json({ error: error.toString() });
     }

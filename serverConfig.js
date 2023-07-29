@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import cors from 'cors';
 
 import Route from './src/route/index.js';
 import { mongoDBUrl } from './src/constants.js';
@@ -14,6 +15,7 @@ export default class ServerConfig {
   }
 
   configureMiddleware(app) {
+    app.use(cors());
     new Route(app);
   }
 
