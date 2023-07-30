@@ -2,6 +2,8 @@ import UserRoute from './user.route.js';
 import TaskRoute from './task.route.js';
 import ProjectRoute from './project.route.js';
 
+import AuthController from '../controllers/auth.controller.js';
+
 export default class Routes {
   userRoute = new UserRoute();
   taskRoute = new TaskRoute();
@@ -25,7 +27,7 @@ export default class Routes {
 
   configBaseRoute(app) {
     app.get("/", this.homeRouteHandler);
-    app.post("/login", )
+    app.post("/login", AuthController.login);
     app.use("/users", this.userRoute.router);
     app.use("/tasks", this.taskRoute.router);
     app.use("/projects", this.projectRoute.router);

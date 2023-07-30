@@ -30,6 +30,7 @@ class UserController {
         return res.status(409).json({ error: 'Email already exists' });
       }
 
+      const newUser = new UserModel(req.body);
       await newUser.save();
 
       return res.status(201).json({ message: 'User created successfully' });
@@ -59,8 +60,30 @@ class UserController {
     }
   }
 
-  static async updateUser() {
+  static async updateUser(req, res, next) {
+    let { data } = req.body;
+    let { id } = req.params;
 
+    try {
+      const updatedUser = await UserModel.findByIdAndUpdate(id, data, {
+        new: true, // Return the modified document instead of the original one
+        runValidators: true, // Run Mongoose validators for the updatedData
+      });
+
+      if (!updatedUser) {
+        return res.status(401).json({
+          success: false,
+          message: "User not found."
+        });
+      } else {
+        return res.json({
+          success: true,
+          data: updatedUser
+        });
+      }
+    } catch (error) {
+      return res.status(500).json({ error: error.toString() });
+    }
   }
 
   static async deleteUser() {

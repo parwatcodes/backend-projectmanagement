@@ -6,6 +6,7 @@ class AuthController {
   static async login(req, res, next) {
     try {
       const { email, password } = req.body;
+      console.log('eeeee', email, password)
       const user = await UserModel.findOne({ email });
 
       if (!user) {
