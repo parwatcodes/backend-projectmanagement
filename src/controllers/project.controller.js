@@ -1,4 +1,5 @@
 import ProjectModel from "../models/project.model.js";
+import TaskModel from "../models/task.model.js";
 
 class ProjectController {
   constructor() { }
@@ -42,7 +43,7 @@ class ProjectController {
           message: "Project not found."
         });
       } else {
-        return res.status(401).json({
+        return res.json({
           success: true,
           data: project
         });
@@ -68,7 +69,7 @@ class ProjectController {
           message: "Project not found."
         });
       } else {
-        return res.status(401).json({
+        return res.json({
           success: true,
           data: updatedProject
         });
@@ -80,6 +81,22 @@ class ProjectController {
 
   static async deleteProject() {
 
+  }
+
+  static async getProjectTask(req, res, next) {
+    let { id } = req.params;
+
+    try {
+      let data = await TaskModel.find({ project_id: id })
+        .populate('project_id');
+
+      return res.json({
+        success: true,
+        data
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.toString() });
+    }
   }
 }
 

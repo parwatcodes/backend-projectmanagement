@@ -15,5 +15,9 @@ export default class ProjectRoute {
       .get(ProjectCtrl.getProject)
       .put(ProjectCtrl.updateProject)
       .delete(ProjectCtrl.deleteProject);
+
+
+    this.router.route("/:id/tasks")
+      .get(ProjectCtrl.getProjectTask);
   }
 }
