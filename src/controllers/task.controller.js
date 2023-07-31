@@ -43,7 +43,7 @@ class TaskController {
           message: "Task not found."
         });
       } else {
-        return res.status(401).json({
+        return res.json({
           success: true,
           data: task
         });
@@ -69,7 +69,7 @@ class TaskController {
           message: "Task not found."
         });
       } else {
-        return res.status(401).json({
+        return res.json({
           success: true,
           data: updatedTask
         });
