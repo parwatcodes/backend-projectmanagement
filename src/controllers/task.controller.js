@@ -5,7 +5,7 @@ class TaskController {
 
   static async getTasks(req, res, next) {
     try {
-      let tasks = await TaskModel.find();
+      let tasks = await TaskModel.find().populate('project_id')
 
       res.json({
         success: true,
@@ -27,7 +27,8 @@ class TaskController {
         message: 'Task created successfully'
       });
     } catch (err) {
-      return res.status(500).json({ error: 'Internal server error' });
+      console.log('error', err);
+      return res.status(500).json({ error: err.toString() });
     }
   }
 

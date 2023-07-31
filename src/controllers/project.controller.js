@@ -1,5 +1,6 @@
 import ProjectModel from "../models/project.model.js";
 import TaskModel from "../models/task.model.js";
+import UserModel from "../models/user.model.js";
 
 class ProjectController {
   constructor() { }
@@ -37,15 +38,25 @@ class ProjectController {
       const { id } = req.params;
       const project = await ProjectModel.findById(id);
 
+
       if (!project) {
         return res.status(401).json({
           success: false,
           message: "Project not found."
         });
       } else {
+        let projectMembers = [];
+
+        if (req.query?.all) {
+          projectMembers = await UserModel.find({ project_id: { $in: [id] } });
+        }
+
         return res.json({
           success: true,
-          data: project
+          data: {
+            project,
+            projectMembers
+          }
         });
       }
     } catch (error) {
@@ -83,11 +94,27 @@ class ProjectController {
 
   }
 
-  static async getProjectTask(req, res, next) {
+  static async getProjectTasks(req, res, next) {
     let { id } = req.params;
 
     try {
       let data = await TaskModel.find({ project_id: id })
+        .populate('project_id');
+
+      return res.json({
+        success: true,
+        data
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.toString() });
+    }
+  }
+
+  static async getProjectMembers(req, res, next) {
+    let { id } = req.params;
+
+    try {
+      let data = await UserModel.find({ project_id: id })
         .populate('project_id');
 
       return res.json({

@@ -18,6 +18,9 @@ export default class ProjectRoute {
 
 
     this.router.route("/:id/tasks")
-      .get(ProjectCtrl.getProjectTask);
+      .get(ProjectCtrl.getProjectTasks);
+
+    this.router.route('/:id/members')
+      .get(ProjectCtrl.getProjectMembers);
   }
 }

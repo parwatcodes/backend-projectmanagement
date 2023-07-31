@@ -15,5 +15,9 @@ export default class UserRoute {
       .get(UserCtrl.getUser)
       .put(UserCtrl.updateUser)
       .delete(UserCtrl.deleteUser);
+
+    this.router.route("/admins", UserCtrl.getAdmins);
+    this.router.route("/members", UserCtrl.getMembers);
+    this.router.post("/link-user-to-project", UserCtrl.linkUtoP);
   }
 }

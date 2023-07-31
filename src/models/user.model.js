@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
     enum: ['admin', 'member'],
     required: true,
   },
+  project_id: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Project'
+  }],
   hourlyRate: Number
 });
 
