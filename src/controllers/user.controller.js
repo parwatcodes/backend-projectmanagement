@@ -91,8 +91,6 @@ class UserController {
   static async linkUtoP(req, res, next) {
     let { projectId, memberId } = req.body;
 
-    console.log('api all')
-
     try {
       const user = await UserModel.findById(memberId);
 
